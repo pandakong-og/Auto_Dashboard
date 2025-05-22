@@ -236,7 +236,7 @@
     <div class="container">
         <div class="timestamp" id="timestamp-display">{timestamp_display}</div>
         <div class="table-title">Custom Criteria Filter</div>
-        <div class="exclude-note">Filter excludes BTC, ETH, USDT, XRP, BNB, SOL, USDC, DOGE, ADA, TRX</div>
+        <div class="exclude-note">Volume & Momentum filters exclude BTC, ETH, USDT, XRP, BNB, SOL, USDC, DOGE, ADA, TRX</div>
         <div class="filter-section">
             <h3 class="filter-title">Select up to 5 criteria to find matching coins</h3>
             <div class="selection-counter" id="selection-counter">
@@ -348,16 +348,20 @@
             "Top Gainer 15m": ["LAUNCHCOIN", "SPX", "1000MUMU", "HIFI", "NIL", "PRCL", "MYRIA", "ARC", "XCN", "VINE", "CGPT", "GRASS", "AIXBT", "WIF", "GRIFFAIN", "RUNE", "ORDI", "POPCAT", "PEAQ", "ZEREBRO", "SIREN", "DOGS", "LISTA", "FWOG", "NTRN", "BR", "KOMA", "AR", "MELANIA", "NXPC"],
             "Top Gainer 1H": ["LAUNCHCOIN", "ANIME", "LISTA", "HYPE", "GRIFFAIN", "NIL", "PARTI", "SIREN", "SPX", "CVC", "ELX", "HIFI", "XCN", "MERL", "CGPT", "MELANIA", "1000CATS", "10000WHY", "BIO", "POPCAT", "GRASS", "MICHI", "INIT", "RUNE", "KOMA", "ORDI", "ZBCN", "FUEL", "PYTH", "MUBARAK"],
             "Low Funding": ["ZBCN", "HAEDAL", "1000BTT", "BAT", "BLAST", "BSV", "AERGO", "XEM", "ID", "ALEO"],
-            "OB 4H": ["XMR", "CORE", "DOG", "COOKIE", "ZBCN", "CVC", "HAEDAL", "XAUT"],
-            "OB 1H": ["CORE", "XMR", "HYPE", "TAO", "BSV", "POL", "DOG", "ORDI", "ZEC", "VR", "10000SATS", "ROAM", "ORDER", "JELLYJELLY", "1000CAT", "10000WHY", "XAUT", "BOME", "COOKIE", "REQ", "SIREN", "ELX"],
-            "OB 30m": ["HYPE", "SPX", "STX", "CORE", "POL", "TAO", "BSV", "XCN", "ZEC", "DOG", "ORDI", "RUNE", "GRASS", "ORDER", "10000WHY", "VR", "1000CAT", "ELX", "SIREN", "10000SATS", "ANIME", "LISTA", "MERL", "ROAM", "MYRIA", "BIO", "JELLYJELLY", "ZBCN", "MANTA", "XAUT", "DENT", "BR", "DOGS"],
+            "OB 4H": ["XMR", "BTC", "CORE", "DOG", "COOKIE", "ZBCN", "CVC", "HAEDAL", "XAUT"],
+            "OB 1H": ["CORE", "XMR", "HYPE", "TAO", "BSV", "BNB", "POL", "DOG", "ORDI", "ZEC", "VR", "10000SATS", "ROAM", "ORDER", "JELLYJELLY", "1000CAT", "10000WHY", "XAUT", "BOME", "COOKIE", "REQ", "SIREN", "ELX"],
+            "OB 30m": ["HYPE", "BNB", "SPX", "STX", "BTC", "CORE", "POL", "TAO", "BSV", "XCN", "ZEC", "DOG", "ORDI", "RUNE", "GRASS", "ORDER", "10000WHY", "VR", "1000CAT", "ELX", "SIREN", "10000SATS", "ANIME", "LISTA", "MERL", "ROAM", "MYRIA", "BIO", "JELLYJELLY", "ZBCN", "MANTA", "XAUT", "DENT", "BR", "DOGS"],
             "OB 15m": ["HYPE", "SPX", "S", "XCN", "ZEC", "ORDI", "ZKJ", "GRASS", "ORDER", "ANIME", "LISTA", "PARTI", "10000WHY", "HIFI", "SIREN", "MERL", "MYRIA", "TSTBSC", "BIO", "SEND", "1000CAT", "DENT", "CGPT", "RAD", "XNO", "JOE", "VR", "CTK"],
             "OS 4H": ["XEM", "XTER"],
             "OS 1H": ["LAUNCHCOIN"],
             "OS 30m": [],
             "OS 15m": []
         };
+        
+        // Define which filter categories exclude major coins
         const excludedCoins = ["BTC", "ETH", "USDT", "XRP", "BNB", "SOL", "USDC", "DOGE", "ADA", "TRX"];
+        const volumeFundingColumns = ["High Vol 15m", "High Vol 1H", "High Vol 4H", "Top Gainer 15m", "Top Gainer 1H", "Low Funding"];
+        
         let selectedCriteria = [];
         const MAX_CRITERIA = 5;
         const checkboxes = document.querySelectorAll('input[name="criteria"]');
@@ -366,11 +370,14 @@
         const resetButton = document.getElementById('reset-button');
         const resultsContainer = document.getElementById('results-container');
         const resultsList = document.getElementById('results-list');
+        
         document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners();
             console.log('Available filter criteria:', Object.keys(excelData));
-            console.log('Excluded coins:', excludedCoins);
+            console.log('Volume/Funding columns (exclude major coins):', volumeFundingColumns);
+            console.log('Excluded coins for Volume/Funding filters:', excludedCoins);
         });
+        
         function setupEventListeners() {
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateSelectedCriteria);
@@ -378,6 +385,7 @@
             filterButton.addEventListener('click', applyFilters);
             resetButton.addEventListener('click', resetFilters);
         }
+        
         function updateSelectedCriteria() {
             selectedCriteria = Array.from(checkboxes)
                 .filter(checkbox => checkbox.checked)
@@ -401,6 +409,7 @@
                 });
             }
         }
+        
         function applyFilters() {
             if (selectedCriteria.length === 0) {
                 alert('Please select at least one criterion.');
@@ -413,6 +422,7 @@
             const matchingCoins = findMatchingCoins();
             displayResults(matchingCoins);
         }
+        
         function findMatchingCoins() {
             if (selectedCriteria.length === 0) {
                 return [];
@@ -422,9 +432,19 @@
                 const criterionCoins = excelData[selectedCriteria[i]];
                 matchingCoins = matchingCoins.filter(coin => criterionCoins.includes(coin));
             }
-            matchingCoins = matchingCoins.filter(coin => !excludedCoins.includes(coin));
+            
+            // Apply exclusion logic based on selected criteria
+            // Only exclude major coins if ALL selected criteria are volume/funding related
+            const hasOBOS = selectedCriteria.some(criterion => criterion.includes('OB') || criterion.includes('OS'));
+            if (!hasOBOS) {
+                // If no OB/OS criteria selected, exclude major coins (as they were already excluded in data)
+                // Data was already filtered, so no additional filtering needed
+            }
+            // If OB/OS criteria are selected, major coins are already included in those datasets
+            
             return matchingCoins;
         }
+        
         function displayResults(matchingCoins) {
             resultsList.innerHTML = '';
             resultsContainer.style.display = 'block';
@@ -461,6 +481,7 @@
             }
             resultsContainer.scrollIntoView({ behavior: 'smooth' });
         }
+        
         function resetFilters() {
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false;
