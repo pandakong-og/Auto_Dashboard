@@ -420,7 +420,7 @@
                 return;
             }
             const matchingCoins = findMatchingCoins();
-            displayResults(matchingCoins);
+            displayResults(matchingCoins.sort()); // Sort coins alphabetically
         }
         
         function findMatchingCoins() {
