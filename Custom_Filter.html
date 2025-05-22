@@ -20,10 +20,16 @@
             text-align: center;
             font-size: 18px;
             font-weight: bold;
-            margin: 15px 0;
+            margin: 15px 0 5px 0;
             padding: 5px;
             background-color: #3a3a3a;
             border-radius: 5px;
+        }
+        .exclude-note {
+            color: #e0e0e0;
+            text-align: center;
+            font-size: 14px;
+            margin: 5px 0 15px 0;
         }
         .table-container {
             max-height: 600px;
@@ -76,13 +82,12 @@
             background-color: #444;
         }
         .timestamp {
-            color: #e0e0e0;
+            color: #2c2c2c;
             text-align: center;
             font-size: 14px;
             margin: 15px 0;
             padding: 0;
         }
-        /* Filter section styles */
         .filter-section {
             background-color: #333;
             border-radius: 5px;
@@ -170,7 +175,6 @@
         .counter-warn {
             color: #f8d7da;
         }
-        /* Results section styles */
         .results-container {
             display: none;
             background-color: #333;
@@ -213,7 +217,6 @@
             border-radius: 4px;
             text-align: center;
         }
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .filter-options {
                 flex-direction: column;
@@ -225,29 +228,21 @@
     </style>
 </head>
 <body>
-    <!-- Add navigation buttons at the top -->
     <div class="navigation">
         <a href="index.html" class="nav-button">Home</a>
         <a href="Visual_Table_1_Sticky_Header.html" class="nav-button">High Vol Table</a>
         <a href="Visual_Table_2_Sticky_Header.html" class="nav-button">OB/OS Table</a>
     </div>
-
     <div class="container">
-        <!-- Timestamp display -->
         <div class="timestamp" id="timestamp-display">{timestamp_display}</div>
-        
         <div class="table-title">Custom Criteria Filter</div>
-        
-        <!-- Filter Section -->
+        <div class="exclude-note">Filter excludes BTC, ETH, USDT, XRP, BNB, SOL, USDC, DOGE, ADA, TRX</div>
         <div class="filter-section">
             <h3 class="filter-title">Select up to 5 criteria to find matching coins</h3>
-            
             <div class="selection-counter" id="selection-counter">
                 0 of 5 criteria selected
             </div>
-            
             <div class="filter-options">
-                <!-- High Volume and Top Gainer Filters -->
                 <div class="filter-category">
                     <h4>Volume & Momentum</h4>
                     <div class="checkbox-container">
@@ -274,8 +269,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Funding Rate Filters -->
                 <div class="filter-category">
                     <h4>Funding</h4>
                     <div class="checkbox-container">
@@ -286,8 +279,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Overbought (OB) Filters -->
                 <div class="filter-category">
                     <h4>Overbought (OB)</h4>
                     <div class="checkbox-container">
@@ -310,8 +301,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Oversold (OS) Filters -->
                 <div class="filter-category">
                     <h4>Oversold (OS)</h4>
                     <div class="checkbox-container">
@@ -335,100 +324,71 @@
                     </div>
                 </div>
             </div>
-            
             <div class="action-buttons">
                 <button id="filter-button" class="filter-button">Apply Filters</button>
                 <button id="reset-button" class="reset-button">Reset</button>
             </div>
         </div>
-        
-        <!-- Results Section (initially hidden) -->
         <div id="results-container" class="results-container">
             <h3 class="results-title">Coins matching all selected criteria</h3>
             <div id="results-list">
-                <!-- Results will be populated here by JavaScript -->
             </div>
         </div>
     </div>
-    
-    <!-- Add navigation buttons at the bottom -->
     <div class="navigation" style="margin-top: 20px;">
         <a href="index.html" class="nav-button">Home</a>
         <a href="Visual_Table_1_Sticky_Header.html" class="nav-button">High Vol Table</a>
         <a href="Visual_Table_2_Sticky_Header.html" class="nav-button">OB/OS Table</a>
     </div>
-
     <script>
-        // Global variables to store data
         let excelData = {
-            "High Vol 15m": ["BTC", "ETH", "SOL", "SUI", "WIF", "XRP", "1000PEPE", "FARTCOIN", "LINK", "DOGE", "TRUMP", "INIT", "MOODENG", "ENA", "HAEDAL", "OP", "POPCAT", "COOKIE", "ADA", "VIRTUAL", "AAVE", "CHILLGUY", "1000BONK", "KAITO", "AI16Z", "COW", "BNB", "WCT", "GALA", "NEAR"],
-            "High Vol 1H": ["BTC", "ETH", "SOL", "SUI", "1000PEPE", "DOGE", "XRP", "LINK", "WIF", "FARTCOIN", "ADA", "KAITO", "MOODENG", "TRUMP", "HAEDAL", "ENA", "OP", "1000BONK", "COOKIE", "WCT", "AAVE", "HYPE", "VIRTUAL", "NEAR", "POPCAT", "JELLYJELLY", "OM", "EIGEN", "AI16Z", "GALA"],
-            "High Vol 4H": ["BTC", "ETH", "SOL", "XRP", "1000PEPE", "DOGE", "SUI", "LINK", "MOODENG", "WIF", "FARTCOIN", "TRUMP", "KAITO", "HAEDAL", "ADA", "ENA", "AAVE", "WCT", "OM", "HYPE", "VIRTUAL", "INIT", "COOKIE", "NEAR", "ZEREBRO", "OP", "1000BONK", "AI16Z", "GALA", "ONDO"],
-            "Top Gainer 15m": ["WIF", "PROMPT", "DOG", "TAI", "ALCH", "NXPC", "DOOD", "FWOG", "PUFFER", "10000LADYS", "JELLYJELLY", "1000MUMU", "DEGEN", "SKYAI", "FLOCK", "1000BONK", "PENGU", "XION", "1000NEIROCTO", "MOODENG", "MASK", "ARC", "VINE", "PORTAL", "PRCL", "COW", "INIT", "PIPPIN", "FXS", "PEOPLE"],
-            "Top Gainer 1H": ["FOXY", "CHILLGUY", "INIT", "DOG", "WIF", "COW", "FWOG", "DARK", "MOODENG", "DOOD", "AI16Z", "1000RATS", "ARC", "1000000MOG", "PEOPLE", "PONKE", "DRIFT", "POPCAT", "PRCL", "PIXEL", "MYRO", "PNUT", "1000NEIROCTO", "MELANIA", "PROMPT", "10000LADYS", "AIXBT", "CGPT", "GIGA", "BANANA"],
-            "Low Funding": ["HAEDAL", "XEM", "MAJOR", "AIOZ", "BMT", "BNT", "SLF", "FLR", "ZBCN", "FOXY"],
-            "OB 4H": ["XMR", "JST", "KAITO", "HAEDAL", "COOKIE"],
-            "OB 1H": ["JUP", "KAITO", "EIGEN", "JST", "HAEDAL", "HYPER", "COOKIE", "FOXY", "MILK", "ZEN", "KMNO", "SONIC", "CLOUD", "COW"],
-            "OB 30m": ["JUP", "DOG", "EIGEN", "HAEDAL", "FOXY", "COW", "HYPER", "COOKIE", "ZEN", "BANANA", "CHILLGUY", "1000RATS", "CGPT", "MILK", "PIXEL", "CLOUD"],
-            "OB 15m": ["WIF", "DOG", "AI16Z", "COW", "FOXY", "HAEDAL", "CHILLGUY", "ZEN", "CGPT", "PIXEL", "BANANA", "DOOD"],
+            "High Vol 15m": ["1000PEPE", "WIF", "HYPE", "WLD", "SUI", "FARTCOIN", "LINK", "ENA", "1000NEIROCTO", "ORDI", "MOODENG", "ONDO", "POPCAT", "COOKIE", "VIRTUAL", "TRUMP", "SPX", "INIT", "AVAX", "PNUT", "OP", "AAVE", "ARB"],
+            "High Vol 1H": ["1000PEPE", "SUI", "WIF", "LINK", "HYPE", "FARTCOIN", "TRUMP", "MOODENG", "ENA", "COOKIE", "AAVE", "1000NEIROCTO", "OP", "PENGU", "WLD", "GALA", "POPCAT", "UNI", "ONDO", "VIRTUAL", "LTC", "ORDI", "AVAX", "ETHFI"],
+            "High Vol 4H": ["SUI", "1000PEPE", "WIF", "TRUMP", "FARTCOIN", "LINK", "HYPE", "ENA", "MOODENG", "AAVE", "COOKIE", "HAEDAL", "POPCAT", "VIRTUAL", "AVAX", "INIT", "NEAR", "WLD", "OP", "ARB", "ONDO", "GALA", "1000BONK"],
+            "Top Gainer 15m": ["LAUNCHCOIN", "SPX", "1000MUMU", "HIFI", "NIL", "PRCL", "MYRIA", "ARC", "XCN", "VINE", "CGPT", "GRASS", "AIXBT", "WIF", "GRIFFAIN", "RUNE", "ORDI", "POPCAT", "PEAQ", "ZEREBRO", "SIREN", "DOGS", "LISTA", "FWOG", "NTRN", "BR", "KOMA", "AR", "MELANIA", "NXPC"],
+            "Top Gainer 1H": ["LAUNCHCOIN", "ANIME", "LISTA", "HYPE", "GRIFFAIN", "NIL", "PARTI", "SIREN", "SPX", "CVC", "ELX", "HIFI", "XCN", "MERL", "CGPT", "MELANIA", "1000CATS", "10000WHY", "BIO", "POPCAT", "GRASS", "MICHI", "INIT", "RUNE", "KOMA", "ORDI", "ZBCN", "FUEL", "PYTH", "MUBARAK"],
+            "Low Funding": ["ZBCN", "HAEDAL", "1000BTT", "BAT", "BLAST", "BSV", "AERGO", "XEM", "ID", "ALEO"],
+            "OB 4H": ["XMR", "CORE", "DOG", "COOKIE", "ZBCN", "CVC", "HAEDAL", "XAUT"],
+            "OB 1H": ["CORE", "XMR", "HYPE", "TAO", "BSV", "POL", "DOG", "ORDI", "ZEC", "VR", "10000SATS", "ROAM", "ORDER", "JELLYJELLY", "1000CAT", "10000WHY", "XAUT", "BOME", "COOKIE", "REQ", "SIREN", "ELX"],
+            "OB 30m": ["HYPE", "SPX", "STX", "CORE", "POL", "TAO", "BSV", "XCN", "ZEC", "DOG", "ORDI", "RUNE", "GRASS", "ORDER", "10000WHY", "VR", "1000CAT", "ELX", "SIREN", "10000SATS", "ANIME", "LISTA", "MERL", "ROAM", "MYRIA", "BIO", "JELLYJELLY", "ZBCN", "MANTA", "XAUT", "DENT", "BR", "DOGS"],
+            "OB 15m": ["HYPE", "SPX", "S", "XCN", "ZEC", "ORDI", "ZKJ", "GRASS", "ORDER", "ANIME", "LISTA", "PARTI", "10000WHY", "HIFI", "SIREN", "MERL", "MYRIA", "TSTBSC", "BIO", "SEND", "1000CAT", "DENT", "CGPT", "RAD", "XNO", "JOE", "VR", "CTK"],
             "OS 4H": ["XEM", "XTER"],
-            "OS 1H": [],
-            "OS 30m": ["DBR"],
+            "OS 1H": ["LAUNCHCOIN"],
+            "OS 30m": [],
             "OS 15m": []
         };
-        
+        const excludedCoins = ["BTC", "ETH", "USDT", "XRP", "BNB", "SOL", "USDC", "DOGE", "ADA", "TRX"];
         let selectedCriteria = [];
         const MAX_CRITERIA = 5;
-        
-        // DOM Elements
         const checkboxes = document.querySelectorAll('input[name="criteria"]');
         const selectionCounter = document.getElementById('selection-counter');
         const filterButton = document.getElementById('filter-button');
         const resetButton = document.getElementById('reset-button');
         const resultsContainer = document.getElementById('results-container');
         const resultsList = document.getElementById('results-list');
-        
-        // Initialize the page
         document.addEventListener('DOMContentLoaded', () => {
-            // Set up event listeners
             setupEventListeners();
-            
-            // Log available data for debugging
             console.log('Available filter criteria:', Object.keys(excelData));
+            console.log('Excluded coins:', excludedCoins);
         });
-        
-        // Set up event listeners for the page
         function setupEventListeners() {
-            // Checkbox event listeners
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateSelectedCriteria);
             });
-            
-            // Filter button
             filterButton.addEventListener('click', applyFilters);
-            
-            // Reset button
             resetButton.addEventListener('click', resetFilters);
         }
-        
-        // Update selected criteria based on checkbox changes
         function updateSelectedCriteria() {
             selectedCriteria = Array.from(checkboxes)
                 .filter(checkbox => checkbox.checked)
                 .map(checkbox => checkbox.value);
-            
-            // Update counter
             selectionCounter.textContent = `${selectedCriteria.length} of ${MAX_CRITERIA} criteria selected`;
-            
-            // Warn if too many selected
             if (selectedCriteria.length > MAX_CRITERIA) {
                 selectionCounter.classList.add('counter-warn');
                 selectionCounter.textContent += ' (maximum 5 allowed)';
             } else {
                 selectionCounter.classList.remove('counter-warn');
             }
-            
-            // Disable checkboxes if limit reached
             if (selectedCriteria.length >= MAX_CRITERIA) {
                 checkboxes.forEach(checkbox => {
                     if (!checkbox.checked) {
@@ -441,59 +401,35 @@
                 });
             }
         }
-        
-        // Apply selected filters and show results
         function applyFilters() {
-            // Make sure we have selected criteria
             if (selectedCriteria.length === 0) {
                 alert('Please select at least one criterion.');
                 return;
             }
-            
             if (selectedCriteria.length > MAX_CRITERIA) {
                 alert(`Please select at most ${MAX_CRITERIA} criteria.`);
                 return;
             }
-            
-            // Find coins that match all selected criteria
             const matchingCoins = findMatchingCoins();
-            
-            // Show results
             displayResults(matchingCoins);
         }
-        
-        // Find coins that appear in all selected criteria lists
         function findMatchingCoins() {
-            // If no criteria selected, return empty array
             if (selectedCriteria.length === 0) {
                 return [];
             }
-            
-            // Start with all coins from the first criterion
             let matchingCoins = [...excelData[selectedCriteria[0]]];
-            
-            // Filter down to only coins that appear in all other selected criteria
             for (let i = 1; i < selectedCriteria.length; i++) {
                 const criterionCoins = excelData[selectedCriteria[i]];
                 matchingCoins = matchingCoins.filter(coin => criterionCoins.includes(coin));
             }
-            
+            matchingCoins = matchingCoins.filter(coin => !excludedCoins.includes(coin));
             return matchingCoins;
         }
-        
-        // Display the matching coins in the results section
         function displayResults(matchingCoins) {
-            // Clear previous results
             resultsList.innerHTML = '';
-            
-            // Show the results container
             resultsContainer.style.display = 'block';
-            
-            // Update the results heading
             const resultsTitle = document.querySelector('.results-title');
             resultsTitle.textContent = `Coins matching all ${selectedCriteria.length} selected criteria`;
-            
-            // Display matching coins or a message if none
             if (matchingCoins.length === 0) {
                 resultsList.innerHTML = `
                     <div class="message-box">
@@ -501,29 +437,21 @@
                     </div>
                 `;
             } else {
-                // Create a list of matching coins with their criteria
                 matchingCoins.forEach(coin => {
                     const coinDiv = document.createElement('div');
                     coinDiv.className = 'matched-coin';
-                    
-                    // Add coin symbol
                     const symbolSpan = document.createElement('span');
                     symbolSpan.className = 'coin-symbol';
                     symbolSpan.textContent = coin;
                     coinDiv.appendChild(symbolSpan);
-                    
-                    // Add criteria tags
                     selectedCriteria.forEach(criterion => {
                         const criterionTag = document.createElement('span');
                         criterionTag.className = 'criterion-tag';
                         criterionTag.textContent = criterion;
                         coinDiv.appendChild(criterionTag);
                     });
-                    
                     resultsList.appendChild(coinDiv);
                 });
-                
-                // Add summary
                 const summaryDiv = document.createElement('div');
                 summaryDiv.style.marginTop = '15px';
                 summaryDiv.style.textAlign = 'center';
@@ -531,27 +459,16 @@
                 summaryDiv.textContent = `Found ${matchingCoins.length} coin${matchingCoins.length !== 1 ? 's' : ''} matching all criteria.`;
                 resultsList.appendChild(summaryDiv);
             }
-            
-            // Scroll to results
             resultsContainer.scrollIntoView({ behavior: 'smooth' });
         }
-        
-        // Reset all filters
         function resetFilters() {
-            // Uncheck all checkboxes
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false;
                 checkbox.disabled = false;
             });
-            
-            // Reset selected criteria
             selectedCriteria = [];
-            
-            // Update counter
             selectionCounter.textContent = `0 of ${MAX_CRITERIA} criteria selected`;
             selectionCounter.classList.remove('counter-warn');
-            
-            // Hide results
             resultsContainer.style.display = 'none';
         }
     </script>
