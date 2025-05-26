@@ -234,7 +234,7 @@
         <a href="Visual_Table_2_Sticky_Header.html" class="nav-button">OB/OS Table</a>
     </div>
     <div class="container">
-        <div class="timestamp">Latest Data as of May 26, 2025 - 13:30:00 EST</div>
+        <div class="timestamp">Latest Data as of May 26, 2025 - 17:45:00 EST</div>
         <div class="table-title">Custom Criteria Filter</div>
         <div class="exclude-note">Volume & Momentum filters exclude BTC, ETH, USDT, XRP, BNB, SOL, USDC, DOGE, ADA, TRX</div>
         <div class="filter-section">
@@ -342,20 +342,20 @@
     </div>
     <script>
         let excelData = {
-            "High Vol 15m": ["1000PEPE", "SUI", "FARTCOIN", "WIF", "HYPE", "VIRTUAL", "TRUMP", "MOODENG", "LTC", "JUP", "ENA", "AAVE", "COOKIE", "MOVE", "ZBCN", "AI16Z", "GALA", "TIA", "1000NEIROCTO", "DEEP", "POPCAT", "ARB", "AVAX", "WLD"],
-            "High Vol 1H": ["1000PEPE", "WIF", "SUI", "VIRTUAL", "FARTCOIN", "HYPE", "TRUMP", "MOODENG", "ENA", "WLD", "LINK", "JUP", "RENDER", "AI16Z", "AAVE", "POPCAT", "AVAX", "1000BONK", "ONDO", "GALA", "NEAR", "COOKIE", "UNI"],
-            "High Vol 4H": ["1000PEPE", "HYPE", "SUI", "WIF", "TRUMP", "FARTCOIN", "VIRTUAL", "MOODENG", "COOKIE", "WLD", "ENA", "AAVE", "HIPPO", "1000BONK", "JUP", "RENDER", "AI16Z", "LINK", "UNI", "AVL", "AVAX", "POPCAT", "GALA", "NEAR"],
-            "Top Gainer 15m": ["XEM", "GLMR", "IDEX", "RAD", "MDT", "SLP", "DGB", "ORBS", "OMG", "SNT", "WAVES", "BAN", "ZBCN", "SOON", "SYN", "ELX", "MASK", "BANANA", "ATH", "FB", "HPOS10I", "LEVER", "MOODENG", "OBOL", "GRASS", "THE", "GOAT", "NXPC", "OM", "ORCA"],
-            "Top Gainer 1H": ["DGB", "SNT", "LAUNCHCOIN", "MASK", "FXS", "THE", "JUP", "BANANA", "HEI", "ATH", "AAVE", "DOOD", "LEVER", "HPOS10I", "VELODROME", "OL", "SAFE", "SOON", "GRASS", "JELLYJELLY", "LISTA", "LDO", "MKR", "XCN", "QNT", "ACX", "SYN", "VVV", "MOODENG", "VINE"],
-            "Low Funding": ["RSS3", "ZBCN", "AERGO", "GNO", "HPOS10I", "SLF", "CTSI", "CARV", "HIGH", "AIOZ"],
+            "High Vol 15m": ["1000PEPE", "HYPE", "SUI", "MOODENG", "FARTCOIN", "VIRTUAL", "WIF", "ZBCN", "LTC", "GALA", "1000BONK", "LINK", "TRUMP", "LDO", "COOKIE", "AAVE", "WLD", "KAITO", "ENA", "TON", "MDT", "RENDER", "XTER", "JUP"],
+            "High Vol 1H": ["1000PEPE", "SUI", "HYPE", "FARTCOIN", "WIF", "MOODENG", "RENDER", "VIRTUAL", "TRUMP", "AAVE", "LTC", "COOKIE", "LINK", "ENA", "KAITO", "WLD", "GALA", "AVAX", "JUP", "INJ", "AI16Z", "MASK", "POPCAT", "1000BONK"],
+            "High Vol 4H": ["1000PEPE", "HYPE", "WIF", "SUI", "FARTCOIN", "VIRTUAL", "MOODENG", "TRUMP", "JUP", "ENA", "RENDER", "AAVE", "COOKIE", "WLD", "ZBCN", "MOVE", "LINK", "LTC", "AI16Z", "AVAX", "POPCAT", "GALA", "ONDO"],
+            "Top Gainer 15m": ["BADGER", "BAL", "CVX", "B", "HIPPO", "SYRUP", "WLD", "QNT", "AERGO", "BMT", "ICX", "DEXE", "OG", "LEVER", "PROM", "KOMA", "BANK", "POLYX", "GPS", "BAN", "ZEC", "XVG", "1000TOSHI", "PORTAL", "ZKJ", "FORM", "ALICE", "GTC", "OBOL", "VIC"],
+            "Top Gainer 1H": ["XEM", "GLMR", "RAD", "MDT", "SLP", "DGB", "ORBS", "OMG", "SNT", "LAUNCHCOIN", "TAI", "CETUS", "MYRIA", "PRIME", "RFC", "1000000PEIPEI", "SPEC", "1000CATS", "WCT", "1000TOSHI", "BMT", "1000NEIROCTO", "SD", "VELO", "10000LADYS", "QNT", "PRCL", "MICHI", "RAYDIUM", "AIOZ"],
+            "Low Funding": ["RSS3", "AERGO", "ZBCN", "SLF", "AIOZ", "GNO", "DEEP", "SNT", "HUMA", "CTSI"],
             "OB 4H": ["FLM"],
-            "OB 1H": ["BANANAS31", "SNT", "MASK", "XRD"],
-            "OB 30m": ["MASK", "BANANAS31", "SNT", "LAUNCHCOIN", "XRD"],
-            "OB 15m": ["BANANAS31", "LAUNCHCOIN", "MASK", "SNT", "ELX", "COOK", "XRD"],
-            "OS 4H": ["CETUS", "SLF", "ZENT"],
-            "OS 1H": ["NXPC", "CETUS", "SOLAYER"],
-            "OS 30m": ["SUI", "DEEP", "MOVE", "NXPC", "KAIA", "ZKJ", "SYRUP", "COOKIE", "CETUS", "REZ", "SOLAYER", "ARC", "GORK", "AVAAI", "HAEDAL", "MAVIA"],
-            "OS 15m": ["SUI", "LTC", "1000BONK", "HBAR", "ZKJ", "DEEP", "KAIA", "MOVE", "GIGA", "SYRUP", "VANRY", "AVAAI", "HAEDAL", "ARC", "GORK", "REZ", "1000MUMU", "BNT", "MICHI", "PIPPIN", "SWELL", "ALU", "CETUS", "NIL", "TNSR"]
+            "OB 1H": ["QNT", "KAITO", "BANANAS31", "SNT", "COOK", "FXS", "MASK", "PROM"],
+            "OB 30m": ["QNT", "SNT", "BANANAS31", "FXS", "MYRIA", "COOK"],
+            "OB 15m": ["QNT", "TON", "WCT", "MYRIA", "BANANAS31", "SNT"],
+            "OS 4H": ["CETUS", "ZENT", "SLF", "GORK", "XEM"],
+            "OS 1H": [],
+            "OS 30m": ["OBT", "AVAAI", "PIPPIN"],
+            "OS 15m": ["AVAAI", "FLOCK"]
         };
         
         // Define which filter categories exclude major coins
