@@ -234,7 +234,7 @@
         <a href="Visual_Table_2_Sticky_Header.html" class="nav-button">OB/OS Table</a>
     </div>
     <div class="container">
-        <div class="timestamp">Latest Data as of Oct 1, 2025 - 17:30:00 EST</div>
+        <div class="timestamp">Latest Data as of Oct 1, 2025 - 19:15:00 EST</div>
         <div class="table-title">Custom Criteria Filter</div>
         <div class="exclude-note">Volume & Momentum filters exclude BTC, ETH, USDT, XRP, BNB, SOL, USDC, DOGE, ADA, TRX</div>
         <div class="filter-section">
@@ -342,20 +342,20 @@
     </div>
     <script>
         let excelData = {
-            "High Vol 15m": ["XPL", "HYPE", "SUI", "NEAR", "LTC", "ZEC", "WIF", "PUMPFUN", "ENA", "SOMI", "SQD", "FARTCOIN", "MYX", "1000PEPE", "TWT", "SNX", "LINK", "AAVE", "APT", "AVAX", "ORDER", "WLD", "WLFI", "DASH"],
-            "High Vol 1H": ["XPL", "ZEC", "MYX", "SUI", "PUMPFUN", "SNX", "SOMI", "FARTCOIN", "HYPE", "ALPINE", "TWT", "ENA", "1000PEPE", "LINK", "AVNT", "WIF", "STRK", "AVAX", "SQD", "NEAR", "DASH", "APT", "WLD"],
+            "High Vol 15m": ["SUI", "LTC", "XPL", "AVAX", "SOMI", "MYX", "ZEC", "FARTCOIN", "LINK", "PUMPFUN", "WIF", "HYPE", "1000PEPE", "STRK", "CRV", "TWT", "ENA", "SQD", "ONDO", "DRIFT", "ARB", "SNX", "EIGEN"],
+            "High Vol 1H": ["XPL", "FARTCOIN", "LTC", "SOMI", "PUMPFUN", "SUI", "ZEC", "WLFI", "HYPE", "STRK", "DRIFT", "TWT", "MELANIA", "LINK", "AVAX", "WIF", "MNT", "ENA", "MYX", "EIGEN", "1000PEPE", "ZEN", "SNX"],
             "High Vol 4H": ["XPL", "ZEC", "PUMPFUN", "SOMI", "SUI", "MYX", "HYPE", "MNT", "1000PEPE", "WIF", "FARTCOIN", "AVAX", "LINK", "SQD", "LTC", "ENA", "NEAR", "SNX", "APT", "DASH", "PENGU", "AVNT", "SPX"],
-            "Top Gainer 15m": ["ALU", "AKE", "SQD", "AVL", "RSR", "ZEN", "SOMI", "CROSS", "ELX", "BSU", "LIGHT", "NKN", "BARD", "TSTBSC", "STG", "CLOUD", "ZRO", "SKATE", "GMX", "AVAAI", "APEX", "ZENT", "K", "VELVET", "BTR", "HIFI", "LQTY", "LAUNCHCOIN", "MITO", "VFY"],
-            "Top Gainer 1H": ["SQD", "XPL", "ZEC", "HIFI", "REX", "AIA", "ORDER", "DASH", "SCRT", "ZRO", "BSU", "STG", "NKN", "ZEN", "FF", "GUN", "YALA", "ARIA", "UB", "10000COQ", "THE", "XVG", "RSR", "FLR", "XNY", "JELLYJELLY", "ALU", "QUICK", "BANANA", "GPS"],
-            "Low Funding": ["MYX", "SAROS", "TRUTH", "OG", "QI", "NOM", "GNO", "REQ", "AWE", "FLR"],
+            "Top Gainer 15m": ["ALU", "ICNT", "PEAQ", "VVV", "SPEC", "STBL", "ASTER", "XVG", "XEM", "XCN", "SQD", "QNT", "RFC", "10000WEN", "RLC", "SAROS", "NS", "FUEL", "LAUNCHCOIN", "AIN", "XPIN", "GORK", "PRCL", "ELX", "SUI", "NAORIS", "POWR", "SUSHI", "SPX", "VR"],
+            "Top Gainer 1H": ["ALU", "MELANIA", "LIGHT", "DASH", "RSR", "PEAQ", "VVV", "HEMI", "LTC", "RLC", "OSMO", "SPEC", "0G", "MIRA", "10000WEN", "BR", "NIL", "YZY", "ZEUS", "SAROS", "XCN", "EIGEN", "S", "SYS", "XVG", "HIFI", "GORK", "ROAM", "CUDIS", "HYPER"],
+            "Low Funding": ["MYX", "SAROS", "OG", "BSV", "ALU", "NOM", "AWE", "QI", "ZKC", "GNO"],
             "OB 4H": ["ZEC", "APT", "BTC", "DEXE", "XMR", "XLM", "BCH", "LTC", "ETH", "POL", "ETC", "ICP", "SUI", "DASH", "BSV", "CHZ", "STRK", "DOG", "LPT", "ZK", "HNT", "IOTA", "NEO", "RSR", "SNX", "APE", "SCRT", "CLOUD", "QUICK", "ALU", "ZEN", "LAUNCHCOIN", "SOON", "DEEP", "10000QUBIC", "DUSK", "DBR", "ONT", "XVG", "STEEM", "DGB", "GUN", "KDA", "PENGU", "RFC", "SAHARA"],
-            "OB 1H": ["ZEC", "APT", "DEXE", "XMR", "TRX", "ETC", "POL", "PENDLE", "XLM", "VET", "ENS", "ICP", "SUI", "RSR", "BSV", "XCN", "SNX", "BAT", "CTC", "MOVE", "W", "ZRO", "LPT", "APE", "STRK", "1000XEC", "DASH", "GALA", "QUICK", "CLOUD", "STEEM", "SCRT", "FLUID", "LOOKS", "ATA", "ONT", "ALU", "ETHW", "HIVE", "NKN", "DEEP", "NTRN", "OSMO", "SAHARA", "VTHO", "DENT", "DUSK", "G"],
-            "OB 30m": ["DEXE", "APT", "FLR", "ZEC", "XMR", "RSR", "ZRO", "BAT", "BSV", "TWT", "APE", "SNX", "STRK", "W", "QUICK", "NKN", "K", "STEEM", "STG", "CLOUD", "DUSK", "ONT", "FLM", "OSMO", "SCRT", "SOPH", "VTHO", "BANANA", "G", "HIVE", "ALU", "NTRN", "VELODROME", "WAVES"],
-            "OB 15m": ["FLR", "DEXE", "ZEC", "RSR", "TWT", "ZRO", "BAT", "STRK", "APE", "SNX", "BSV", "NKN", "K", "QUICK", "STG", "JELLYJELLY", "AIA", "G", "OSMO", "STEEM", "SOPH", "VTHO", "GPS", "BICO", "CELR", "DUSK", "WAVES"],
+            "OB 1H": ["APT", "ZEC", "DEXE", "LTC", "TRX", "BTC", "POL", "RSR", "STRK", "BAT", "BSV", "W", "APE", "DASH", "KSM", "QUICK", "CLOUD", "MELANIA", "ALU", "SCRT", "STEEM", "NIL", "ONT", "OSMO", "BANANA", "DUSK", "DENT", "NKN", "RLC", "RVN", "ATA", "FLM", "G", "LOOKS", "NTRN"],
+            "OB 30m": ["APT", "LTC", "DEXE", "TRX", "ZEC", "RSR", "STRK", "BAT", "BSV", "W", "APE", "NIL", "MELANIA", "QUICK", "ALU", "STEEM", "BANANA", "CLOUD", "DUSK", "NKN", "OSMO", "RLC", "ONT", "FLM", "PEAQ", "RVN", "LOOKS", "K", "XNO", "ONG", "PROVE"],
+            "OB 15m": ["LTC", "APT", "DEXE", "RSR", "BAT", "STRK", "NIL", "PEAQ", "RLC", "ALU", "QUICK", "CLOUD", "OSMO", "DUSK", "S", "SYS", "USD1", "STEEM"],
             "OS 4H": ["REX", "SAROS", "HOLO", "XEM"],
-            "OS 1H": ["ALPINE", "OG", "COOK", "SAROS", "SIREN", "REX"],
-            "OS 30m": ["OG"],
-            "OS 15m": ["ATOM", "BB", "RHEA"]
+            "OS 1H": ["ALPINE", "COOK", "HIPPO", "RHEA"],
+            "OS 30m": ["RHEA", "HIPPO", "AIO"],
+            "OS 15m": ["RHEA", "HIPPO", "AIO", "FXS"]
         };
         
         // Define which filter categories exclude major coins
