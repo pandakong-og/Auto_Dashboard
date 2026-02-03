@@ -424,10 +424,27 @@
                 return;
             }
             
-            // Find coins that match ALL selected criteria
+            // Separate OB/OS criteria from other criteria
+            const obOsCriteria = selectedCriteria.filter(c => c.includes('OB ') || c.includes('OS '));
+            const otherCriteria = selectedCriteria.filter(c => !c.includes('OB ') && !c.includes('OS '));
+            
             let matchingCoins = null;
             
-            for (let criterion of selectedCriteria) {
+            // Step 1: Handle OB/OS criteria with OR logic (union)
+            if (obOsCriteria.length > 0) {
+                let obOsCoins = new Set();
+                
+                for (let criterion of obOsCriteria) {
+                    let coinsForCriterion = excelData[criterion] || [];
+                    // Add all coins from this OB/OS criterion to the set (OR logic)
+                    coinsForCriterion.forEach(coin => obOsCoins.add(coin));
+                }
+                
+                matchingCoins = obOsCoins;
+            }
+            
+            // Step 2: Handle other criteria with AND logic (intersection)
+            for (let criterion of otherCriteria) {
                 let coinsForCriterion = excelData[criterion] || [];
                 
                 // For volume/funding columns, exclude major coins
